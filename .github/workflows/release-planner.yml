@@ -1,8 +1,8 @@
-# release-planner:generated 153dac5742a4a67d2700a1e3564b370d0b19e35f sha256:ecb17a3cd93cb81c. Do not edit; change .release-planner/config.yml and run release-planner install.
+# release-planner:generated a5f7cbffcb38b2b8162d81bb420c06e363f4bd53 sha256:fba8e6b9e1121cda. Do not edit; change .release-planner/config.yml and run release-planner install.
 name: Release
 # A pull request that adds or edits release notes is validated, checked, and built before it
-# merges, and one comment on it reports the release's status. Merging it into main
-# approves publication, so ordinary changes never create releases.
+# merges, and a section at the end of its description reports the release's status. Merging it
+# into main approves publication, so ordinary changes never create releases.
 on:
   push:
     branches: ['main']
@@ -19,7 +19,7 @@ on:
 permissions:
   contents: read
 env:
-  RELEASE_PLANNER_VERSION: 153dac5742a4a67d2700a1e3564b370d0b19e35f
+  RELEASE_PLANNER_VERSION: a5f7cbffcb38b2b8162d81bb420c06e363f4bd53
 jobs:
   # Check the generated files, then validate the release pull request and bind it to one
   # release commit: the newest commit the pull request shares with main. Release notes
@@ -50,7 +50,7 @@ jobs:
         with:
           go-version: stable
           cache: false
-      - name: Install Release Planner at commit 153dac5742a4a67d2700a1e3564b370d0b19e35f
+      - name: Install Release Planner at commit a5f7cbffcb38b2b8162d81bb420c06e363f4bd53
         run: |
           go install "github.com/fabricahq/release-planner/cmd/release-planner@$RELEASE_PLANNER_VERSION"
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
@@ -132,7 +132,7 @@ jobs:
         with:
           go-version: stable
           cache: false
-      - name: Install Release Planner at commit 153dac5742a4a67d2700a1e3564b370d0b19e35f
+      - name: Install Release Planner at commit a5f7cbffcb38b2b8162d81bb420c06e363f4bd53
         run: |
           go install "github.com/fabricahq/release-planner/cmd/release-planner@$RELEASE_PLANNER_VERSION"
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
@@ -160,22 +160,23 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: release-planner publish --plan "$RUNNER_TEMP/plan/release-plan.json" --built-plan "$RUNNER_TEMP/built/release-plan.json" --branch main --assets "$RUNNER_TEMP/release-assets" --signer-workflow .github/workflows/release-planner.yml
 
-  # Keep one status comment on the release pull request, from its checks through publication,
-  # whatever failed.
+  # Keep the release status section at the end of the release pull request's description up to
+  # date, from its checks through publication, whatever failed. After the merge, a failure also
+  # gets a comment that mentions whoever merged, since editing a description notifies no one.
   report:
     needs: [validate, release-assets, attest, publish]
     if: always() && needs.validate.result != 'skipped'
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      actions: read # to download the pull request's run's assets
-      pull-requests: write # to write the status comment
+      actions: read # to download and link the build run's assets
+      pull-requests: write # to edit the description's release status and comment on a failure
     steps:
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
           go-version: stable
           cache: false
-      - name: Install Release Planner at commit 153dac5742a4a67d2700a1e3564b370d0b19e35f
+      - name: Install Release Planner at commit a5f7cbffcb38b2b8162d81bb420c06e363f4bd53
         run: |
           go install "github.com/fabricahq/release-planner/cmd/release-planner@$RELEASE_PLANNER_VERSION"
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
