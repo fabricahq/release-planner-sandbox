@@ -5,4 +5,6 @@ A tiny command-line tool, `greet`, used to demonstrate [Release Planner](https:/
 ```sh
 greet Ada
 # Hello, Ada!
+greet --shout Ada
+# HELLO, ADA!
 ```
