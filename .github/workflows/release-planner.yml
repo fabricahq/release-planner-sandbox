@@ -1,4 +1,4 @@
-# release-planner:generated 1b1356c58b4f162f43bcfe9b4d0c2ee589a9ced6 sha256:9e278f4129b3e40e. Do not edit; change .release-planner/config.yml and run release-planner install.
+# release-planner:generated 153dac5742a4a67d2700a1e3564b370d0b19e35f sha256:ecb17a3cd93cb81c. Do not edit; change .release-planner/config.yml and run release-planner install.
 name: Release
 # A pull request that adds or edits release notes is validated, checked, and built before it
 # merges, and one comment on it reports the release's status. Merging it into main
@@ -19,7 +19,7 @@ on:
 permissions:
   contents: read
 env:
-  RELEASE_PLANNER_VERSION: 1b1356c58b4f162f43bcfe9b4d0c2ee589a9ced6
+  RELEASE_PLANNER_VERSION: 153dac5742a4a67d2700a1e3564b370d0b19e35f
 jobs:
   # Check the generated files, then validate the release pull request and bind it to one
   # release commit: the newest commit the pull request shares with main. Release notes
@@ -50,7 +50,7 @@ jobs:
         with:
           go-version: stable
           cache: false
-      - name: Install Release Planner at commit 1b1356c58b4f162f43bcfe9b4d0c2ee589a9ced6
+      - name: Install Release Planner at commit 153dac5742a4a67d2700a1e3564b370d0b19e35f
         run: |
           go install "github.com/fabricahq/release-planner/cmd/release-planner@$RELEASE_PLANNER_VERSION"
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
@@ -132,7 +132,7 @@ jobs:
         with:
           go-version: stable
           cache: false
-      - name: Install Release Planner at commit 1b1356c58b4f162f43bcfe9b4d0c2ee589a9ced6
+      - name: Install Release Planner at commit 153dac5742a4a67d2700a1e3564b370d0b19e35f
         run: |
           go install "github.com/fabricahq/release-planner/cmd/release-planner@$RELEASE_PLANNER_VERSION"
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
@@ -175,7 +175,7 @@ jobs:
         with:
           go-version: stable
           cache: false
-      - name: Install Release Planner at commit 1b1356c58b4f162f43bcfe9b4d0c2ee589a9ced6
+      - name: Install Release Planner at commit 153dac5742a4a67d2700a1e3564b370d0b19e35f
         run: |
           go install "github.com/fabricahq/release-planner/cmd/release-planner@$RELEASE_PLANNER_VERSION"
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
